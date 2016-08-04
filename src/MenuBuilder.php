@@ -20,40 +20,40 @@ class MenuBuilder implements Countable
      *
      * @var array
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Default presenter class.
      *
      * @var string
      */
-    protected $presenter = 'Nwidart\Menus\Presenters\Bootstrap\NavbarPresenter';
+    protected $presenter = Presenters\Bootstrap\NavbarPresenter::class;
 
     /**
      * Style name for each presenter.
      *
      * @var array
      */
-    protected $styles = array();
+    protected $styles = [];
 
     /**
      * Prefix URL.
      *
      * @var string|null
      */
-    protected $prefixUrl = null;
+    protected $prefixUrl;
 
     /**
      * The name of view presenter.
      *
-     * @var null
+     * @var string
      */
-    protected $view = null;
+    protected $view;
 
     /**
      * The laravel view factory instance.
      *
-     * @var \Illumiate\View\Factory
+     * @var \Illuminate\View\Factory
      */
     protected $views;
 
@@ -69,12 +69,17 @@ class MenuBuilder implements Countable
      *
      * @var array
      */
-    protected $bindings = array();
+    protected $bindings = [];
+    /**
+     * @var Repository
+     */
+    private $config;
 
     /**
      * Constructor.
      *
      * @param string $menu
+     * @param Repository $config
      */
     public function __construct($menu, Repository $config)
     {
@@ -261,7 +266,8 @@ class MenuBuilder implements Countable
     /**
      * Set the resolved item bindings
      *
-     * @param array $arr
+     * @param array $bindings
+     * @return $this
      */
     public function setBindings(array $bindings)
     {
@@ -307,7 +313,8 @@ class MenuBuilder implements Countable
             return $this->resolve($property) ?: $property;
         };
 
-        for ($i = 0; $i < count($items); $i++) {
+        $totalItems = count($items);
+        for ($i = 0; $i < $totalItems; $i++) {
             $items[$i]->fill(array_map($resolver, $items[$i]->getProperties()));
         }
     }
