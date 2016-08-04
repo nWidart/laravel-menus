@@ -15,6 +15,14 @@ class Menu implements Countable
      * @var array
      */
     protected $menus = array();
+    /**
+     * @var Repository
+     */
+    private $config;
+    /**
+     * @var Factory
+     */
+    private $views;
 
     /**
      * The constructor.
