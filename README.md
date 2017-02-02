@@ -36,6 +36,9 @@ With one big added bonus that the original package didn't have: **tests**.
   - [Menu Instance](#menu-instance)
   - [Finding Menu Item](#finding-menu-item)
   - [Modifying Menu](#modifying-menu)
+- [Examples](#examples)
+  - [Show/Hide Menu Items](#show-hide-menu-items)
+  
 
 
 ## Installation
@@ -503,3 +506,50 @@ Menu::modify('navbar', function($menu)
 	]);
 });
 ```
+
+<a name="#examples"></a>
+## Examples
+
+<a name="#show-hide-menu-items"></a>
+### Show / Hide Menu Items
+
+In this example, we will show you, how to simplify your templates by using the `hideWhen` method.
+
+Normally an templates looks something like this:
+
+```
+<!-- some awesome html -->
+@if( !\Auth::check() )
+	<!-- code for the guest menu -->
+@else
+
+	<!-- user menu -->
+	@if( \Auth::user()->isAdmin() )
+		<!-- append admin links
+	@endif
+	
+@endif
+<!-- more awesome html -->
+```
+
+With the `hideWhen` method, we can do this in an elegant and configurable way.
+
+```
+//app/Support/menus.php
+Menu::create('menu-name', function($menu) {
+	$menu->url('login', 'Login')->hideWhen(function() {return \Auth::check();});
+	$menu->url('register', 'Register')->hideWhen(function() {return \Auth::check();});
+	$menu->dropdown('Account', function ($sub) {
+		$sub->url('settings', 'Settings');
+		$sub->url('admin', 'Admin Panel')->hideWhen(function() {return !\Auth::user()->isAdmin();});
+	})->hideWhen(function() {return !\Auth::check();});
+});
+```
+
+And in the template we only have to do this:
+```
+<!-- some awesome html -->
+{!! Menu::render('menu-name', 'navbar') !!}
+<!-- more awesome html -->
+```
+
