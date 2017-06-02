@@ -43,5 +43,15 @@
       "Nwidart\\Menus\\Tests\\": "Tests"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Nwidart\\Menus\\MenusServiceProvider"
+      ],
+      "aliases": {
+        "Menu": "Nwidart\\Menus\\Facades\\Menu"
+      }
+    }
+  },
   "minimum-stability": "stable"
 }
