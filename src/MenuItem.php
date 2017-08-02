@@ -7,6 +7,17 @@ use Collective\Html\HtmlFacade as HTML;
 use Illuminate\Contracts\Support\Arrayable as ArrayableContract;
 use Illuminate\Support\Facades\Request;
 
+/**
+ * @property string url
+ * @property string route
+ * @property string title
+ * @property string name
+ * @property string icon
+ * @property int parent
+ * @property array attributes
+ * @property bool active
+ * @property int order
+ */
 class MenuItem implements ArrayableContract
 {
     /**
