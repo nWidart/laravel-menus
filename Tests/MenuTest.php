@@ -131,6 +131,6 @@ TEXT;
 
         $this->assertCount(2, $this->menu->all());
         $this->menu->destroy();
-        $this->assertCount(0,  $this->menu->all());
+        $this->assertCount(0, $this->menu->all());
     }
 }
