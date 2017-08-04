@@ -157,7 +157,7 @@ class MenuItem implements ArrayableContract
     {
         $properties = compact('title', 'order', 'attributes');
 
-        if (func_num_args() == 3) {
+        if (func_num_args() === 3) {
             $arguments = func_get_args();
 
             $title = array_get($arguments, 0);
@@ -183,11 +183,11 @@ class MenuItem implements ArrayableContract
      * @param array $parameters
      * @param array $attributes
      *
-     * @return array
+     * @return MenuItem
      */
     public function route($route, $title, $parameters = array(), $order = 0, $attributes = array())
     {
-        if (func_num_args() == 4) {
+        if (func_num_args() === 4) {
             $arguments = func_get_args();
 
             return $this->add([
@@ -209,11 +209,11 @@ class MenuItem implements ArrayableContract
      * @param $title
      * @param array $attributes
      *
-     * @return array
+     * @return MenuItem
      */
     public function url($url, $title, $order = 0, $attributes = array())
     {
-        if (func_num_args() == 3) {
+        if (func_num_args() === 3) {
             $arguments = func_get_args();
 
             return $this->add([
@@ -307,9 +307,7 @@ class MenuItem implements ArrayableContract
     public function getChilds()
     {
         if (config('menus.ordering')) {
-            return collect($this->childs)->sortBy(function ($child) {
-                return $child->order;
-            })->all();
+            return collect($this->childs)->sortBy('order')->all();
         }
 
         return $this->childs;
@@ -322,7 +320,11 @@ class MenuItem implements ArrayableContract
      */
     public function getUrl()
     {
-        return !empty($this->route) ? route($this->route[0], $this->route[1]) : url($this->url);
+        if ($this->route !== null) {
+            return route($this->route[0], $this->route[1]);
+        }
+
+        return url($this->url);
     }
 
     /**
@@ -344,7 +346,14 @@ class MenuItem implements ArrayableContract
      */
     public function getIcon($default = null)
     {
-        return !is_null($this->icon) && $this->icon != "" ? '<i class="' . $this->icon . '"></i>' : $default;
+        if ($this->icon !== null && $this->icon !== '') {
+            return '<i class="' . $this->icon . '"></i>';
+        }
+        if ($default === null) {
+            return $default;
+        }
+
+        return '<i class="' . $default . '"></i>';
     }
 
     /**
