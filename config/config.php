@@ -10,6 +10,7 @@ return [
         'sidebar' => \Nwidart\Menus\Presenters\Bootstrap\SidebarMenuPresenter::class,
         'navmenu' => \Nwidart\Menus\Presenters\Bootstrap\NavMenuPresenter::class,
         'adminlte' => \Nwidart\Menus\Presenters\Admin\AdminltePresenter::class,
+        'zurbmenu' => \Nwidart\Menus\Presenters\Foundation\ZurbMenuPresenter::class,
     ],
 
     'ordering' => false,
