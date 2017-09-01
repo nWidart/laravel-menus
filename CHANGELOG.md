@@ -10,4 +10,5 @@ All Notable changes to `laravel-menus` will be documented in this file.
 
 - Added a Zurb Foundation menu presenter
 - Added a AdminLTE menu presenter
+- More tests
 - Changelog file
