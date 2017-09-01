@@ -191,6 +191,7 @@ class MenuItemTest extends BaseTestCase
         $this->assertCount(2, $children);
         $dividerMenuItem = $children[1];
         $this->assertEquals('divider', $dividerMenuItem->name);
+        $this->assertTrue($dividerMenuItem->isDivider());
     }
 
     /** @test */
@@ -208,6 +209,7 @@ class MenuItemTest extends BaseTestCase
         $headerItem = $children[0];
         $this->assertEquals('header', $headerItem->name);
         $this->assertEquals('User Stuff', $headerItem->title);
+        $this->assertTrue($headerItem->isHeader());
     }
 
     /** @test */
@@ -278,5 +280,23 @@ class MenuItemTest extends BaseTestCase
         $menuItem = MenuItem::make(['url' => 'settings/account', 'title' => 'Parent Item', 'attributes' => ['my-attr' => 'value']]);
 
         $this->assertEquals(' my-attr="value"', $menuItem->getAttributes());
+    }
+
+    /** @test */
+    public function it_can_check_for_a_submenu()
+    {
+        $menuItem = MenuItem::make(['title' => 'Parent Item']);
+        $menuItem->dropdown('Dropdown item', function (MenuItem $sub) {
+            $sub->header('User Stuff');
+            $sub->url('settings/account', 'Account');
+        });
+
+        $this->assertTrue($menuItem->hasSubMenu());
+        $this->assertTrue($menuItem->hasChilds());
+    }
+
+    /** @test */
+    public function it_can_check_active_state_on_item()
+    {
     }
 }
