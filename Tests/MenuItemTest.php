@@ -295,7 +295,6 @@ class MenuItemTest extends BaseTestCase
         $this->assertTrue($menuItem->hasChilds());
     }
 
-    /** @test */
     public function it_can_check_active_state_on_item()
     {
     }
