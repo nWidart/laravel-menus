@@ -456,7 +456,8 @@ class MenuItem implements ArrayableContract
         foreach ($this->getChilds() as $child) {
             if ($child->inactive()) {
                 continue;
-            } elseif ($child->hasChilds()) {
+            }
+            if ($child->hasChilds()) {
                 if ($child->getActiveStateFromChilds()) {
                     return true;
                 }
@@ -535,9 +536,9 @@ class MenuItem implements ArrayableContract
 
         if ($this->hasRoute()) {
             return $this->getActiveStateFromRoute();
-        } else {
-            return $this->getActiveStateFromUrl();
         }
+
+        return $this->getActiveStateFromUrl();
     }
 
     /**
