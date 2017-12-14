@@ -261,11 +261,13 @@ class MenuItem implements ArrayableContract
     /**
      * Alias method instead "addDivider".
      *
+     * @param int $order
+     *
      * @return MenuItem
      */
-    public function divider()
+    public function divider($order = null)
     {
-        return $this->addDivider();
+        return $this->addDivider($order);
     }
 
     /**
