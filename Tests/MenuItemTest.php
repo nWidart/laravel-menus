@@ -298,4 +298,12 @@ class MenuItemTest extends BaseTestCase
     public function it_can_check_active_state_on_item()
     {
     }
+
+    /** @test */
+    public function it_can_set_auth_via_attributes()
+    {
+        $menuItem = MenuItem::make(['attributes' => ['auth' => true]]);
+
+        $this->assertEquals(true, $menuItem->auth);
+    }
 }

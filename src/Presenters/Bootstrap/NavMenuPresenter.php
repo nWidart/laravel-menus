@@ -17,6 +17,10 @@ class NavMenuPresenter extends NavbarPresenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown' . $this->getActiveStateOnChild($item, ' active open') . '">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					' . $item->getIcon() . ' ' . $item->title . '
@@ -38,6 +42,10 @@ class NavMenuPresenter extends NavbarPresenter
      */
     public function getMultiLevelDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown' . $this->getActiveStateOnChild($item, ' active open') . '">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					' . $item->getIcon() . ' ' . $item->title . '

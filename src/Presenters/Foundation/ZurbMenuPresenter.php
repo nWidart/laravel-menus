@@ -28,6 +28,10 @@ class ZurbMenuPresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li'.$this->getActiveState($item).'><a href="'. $item->getUrl() .'">'.$item->title.'</a></li>';
     }
 
@@ -52,6 +56,10 @@ class ZurbMenuPresenter extends Presenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown dropdown-primary">
                     <a class="dropdown-toggle" href="#">'.$item->title.'</a>
                     <ul class="menu">
@@ -66,6 +74,10 @@ class ZurbMenuPresenter extends Presenter
      */
     public function getMultiLevelDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+        
         return '<li>
                   <a href="#">'.$item->title . '</a>
                   <ul class="menu">

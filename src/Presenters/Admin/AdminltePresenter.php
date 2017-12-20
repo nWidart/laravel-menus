@@ -27,6 +27,10 @@ class AdminltePresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li' . $this->getActiveState($item) . '><a href="' . $item->getUrl() . '" ' . $item->getAttributes() . '>' . $item->getIcon() . ' <span>' . $item->title . '</span></a></li>' . PHP_EOL;
     }
 
@@ -72,6 +76,10 @@ class AdminltePresenter extends Presenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="treeview' . $this->getActiveStateOnChild($item, ' active') . '">
 		          <a href="#">
 					' . $item->getIcon() . ' <span>' . $item->title . '</span>
@@ -95,6 +103,10 @@ class AdminltePresenter extends Presenter
      */
     public function getMultiLevelDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="treeview' . $this->getActiveStateOnChild($item, ' active') . '">
 		          <a href="#">
 					' . $item->getIcon() . ' <span>' . $item->title . '</span>
