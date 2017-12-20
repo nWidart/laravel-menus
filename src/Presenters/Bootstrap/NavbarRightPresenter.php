@@ -17,6 +17,10 @@ class NavbarRightPresenter extends NavbarPresenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown pull-right">
 			      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					' . $item->getIcon() . ' ' . $item->title . '

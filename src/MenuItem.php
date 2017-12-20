@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Request;
  * @property int parent
  * @property array attributes
  * @property bool active
+ * @property bool auth
  * @property int order
  */
 class MenuItem implements ArrayableContract
@@ -50,6 +51,7 @@ class MenuItem implements ArrayableContract
         'active',
         'order',
         'hideWhen',
+        'auth',
     );
 
     /**
@@ -113,6 +115,7 @@ class MenuItem implements ArrayableContract
     public static function make(array $properties)
     {
         $properties = self::setIconAttribute($properties);
+        $properties = self::setAuthAttribute($properties);
 
         return new static($properties);
     }
@@ -261,8 +264,6 @@ class MenuItem implements ArrayableContract
     /**
      * Alias method instead "addDivider".
      *
-     * @param int $order
-     *
      * @return MenuItem
      */
     public function divider($order = null)
@@ -377,7 +378,7 @@ class MenuItem implements ArrayableContract
     {
         $attributes = $this->attributes ? $this->attributes : [];
 
-        array_forget($attributes, ['active', 'icon']);
+        array_forget($attributes, ['active', 'icon', 'auth']);
 
         return HTML::attributes($attributes);
     }
@@ -633,5 +634,26 @@ class MenuItem implements ArrayableContract
     public function __get($key)
     {
         return isset($this->$key) ? $this->$key : null;
+    }
+
+    /**
+     * Set the auth property when the auth is defined in the link attributes.
+     *
+     * @param array $properties
+     *
+     * @return array
+     */
+    protected static function setAuthAttribute(array $properties)
+    {
+        $auth = array_get($properties, 'attributes.auth');
+        if ($auth) {
+            $properties['auth'] = (bool) $auth;
+
+            array_forget($properties, 'attributes.auth');
+
+            return $properties;
+        }
+
+        return $properties;
     }
 }

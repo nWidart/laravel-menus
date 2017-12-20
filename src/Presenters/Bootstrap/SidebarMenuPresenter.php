@@ -35,6 +35,10 @@ class SidebarMenuPresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li' . $this->getActiveState($item) . '>
 			<a href="' . $item->getUrl() . '" ' . $item->getAttributes() . '>'
         . $item->getIcon() . ' ' . $item->title . '</a></li>' . PHP_EOL;
@@ -82,6 +86,10 @@ class SidebarMenuPresenter extends Presenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         $id = str_random();
 
         return '
@@ -109,6 +117,10 @@ class SidebarMenuPresenter extends Presenter
      */
     public function getMultiLevelDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return $this->getMenuWithDropDownWrapper($item);
     }
 }

@@ -27,6 +27,10 @@ class NavbarPresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li' . $this->getActiveState($item) . '><a href="' . $item->getUrl() . '" ' . $item->getAttributes() . '>' . $item->getIcon() . ' ' . $item->title . '</a></li>' . PHP_EOL;
     }
 
@@ -72,6 +76,10 @@ class NavbarPresenter extends Presenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown' . $this->getActiveStateOnChild($item, ' active') . '">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					' . $item->getIcon() . ' ' . $item->title . '
@@ -93,6 +101,10 @@ class NavbarPresenter extends Presenter
      */
     public function getMultiLevelDropdownWrapper($item)
     {
+        if($item->auth && auth()->guest()) {
+            return null;
+        }
+
         return '<li class="dropdown' . $this->getActiveStateOnChild($item, ' active') . '">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					' . $item->getIcon() . ' ' . $item->title . '
