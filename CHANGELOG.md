@@ -4,7 +4,7 @@ All Notable changes to `laravel-menus` will be documented in this file.
 
 ## Next
 
-## 3.0.0
+## 3.0.0 - 2018-09-30
 
 ### Added
 
