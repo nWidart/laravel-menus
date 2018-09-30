@@ -4,6 +4,12 @@ All Notable changes to `laravel-menus` will be documented in this file.
 
 ## Next
 
+## 3.0.0
+
+### Added
+
+- laravel 5.7 support
+
 ## 2.0.0 - 2018-02-14
 
 ### Added
