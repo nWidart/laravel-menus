@@ -60,6 +60,13 @@ class MenuItem implements ArrayableContract
     protected $hideWhen;
 
     /**
+     * Prefix URL.
+     *
+     * @var string|null
+     */
+    protected $prefixUrl;
+
+    /**
      * Constructor.
      *
      * @param array $properties
@@ -89,6 +96,20 @@ class MenuItem implements ArrayableContract
         }
 
         return $properties;
+    }
+
+     /**
+     * Set Prefix URL.
+     *
+     * @param string $prefixUrl
+     *
+     * @return $this
+     */
+    public function setPrefixUrl($prefixUrl)
+    {
+        $this->prefixUrl = $prefixUrl;
+
+        return $this;
     }
 
     /**
@@ -203,6 +224,20 @@ class MenuItem implements ArrayableContract
     }
 
     /**
+     * Format URL.
+     *
+     * @param string $url
+     *
+     * @return string
+     */
+    protected function formatUrl($url)
+    {
+        $uri = !is_null($this->prefixUrl) ? $this->prefixUrl . $url : $url;
+
+        return $uri == '/' ? '/' : ltrim(rtrim($uri, '/'), '/');
+    }
+
+    /**
      * Create new menu item  and set the action to url.
      *
      * @param $url
@@ -217,12 +252,14 @@ class MenuItem implements ArrayableContract
             $arguments = func_get_args();
 
             return $this->add([
-                'url' => array_get($arguments, 0),
+                'url' => $this->formatUrl(array_get($arguments, 0)),
                 'title' => array_get($arguments, 1),
                 'attributes' => array_get($arguments, 2),
             ]);
         }
 
+        $url = $this->formatUrl($url);
+        
         return $this->add(compact('url', 'title', 'order', 'attributes'));
     }
 
