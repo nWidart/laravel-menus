@@ -22,7 +22,35 @@ abstract class Presenter implements PresenterInterface
      */
     public function getCloseTagWrapper()
     {
+
     }
+
+    /**
+     * Get open tag A.
+     *
+     * @return string
+     */
+    public function getOpenTagA($item)
+    {
+        if($item->attributes['vue']){
+            return PHP_EOL . '<router-link to="' . PHP_EOL;
+        }
+        return PHP_EOL . '<a href=">' . PHP_EOL;
+    }
+
+    /**
+     * Get close tag A.
+     *
+     * @return string
+     */
+    public function getCloseTagA($item)
+    {
+        if($item->attributes['vue']){
+            return PHP_EOL . '</router-link>' . PHP_EOL;
+        }
+        return PHP_EOL . '</a>' . PHP_EOL;
+    }
+
 
     /**
      * Get menu tag without dropdown wrapper.
