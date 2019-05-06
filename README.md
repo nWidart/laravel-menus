@@ -14,7 +14,7 @@
 | 5.5  | ^1.0  |
 | 5.6  | ^2.0  |
 | 5.7  | ^3.0  |
-| 5.8  | ^4.0-dev  |
+| 5.8  | 4.0-dev  |
 
 `nwidart/laravel-menus` is a laravel package which created to manage menus. It has a feature called presenters which enables easy styling and custom structure of menu rendering.
 
