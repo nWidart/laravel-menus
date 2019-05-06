@@ -12,7 +12,7 @@ class MenuItemTest extends BaseTestCase
      */
     private $menu;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->menu = app(Menu::class);
