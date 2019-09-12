@@ -21,6 +21,20 @@ interface PresenterInterface
     public function getCloseTagWrapper();
 
     /**
+     * Get open tag A.
+     *
+     * @return string
+     */
+    public function getOpenTagA($item);
+
+    /**
+     * Get close tag A.
+     *
+     * @return string
+     */
+    public function getCloseTagA($item);
+
+    /**
      * Get menu tag without dropdown wrapper.
      *
      * @param \Nwidart\Menus\MenuItem $item

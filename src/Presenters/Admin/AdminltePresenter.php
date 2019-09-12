@@ -27,7 +27,8 @@ class AdminltePresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
-        return '<li' . $this->getActiveState($item) . '><a href="' . $item->getUrl() . '" ' . $item->getAttributes() . '>' . $item->getIcon() . ' <span>' . $item->title . '</span></a></li>' . PHP_EOL;
+        //return '<li' . $this->getActiveState($item) . '><a href="' . $item->getUrl() . '" ' . $item->getAttributes() . '>' . $item->getIcon() . ' <span>' . $item->title . '</span></a></li>' . PHP_EOL;
+        return '<li ' . $this->getActiveState($item) . '>'.$this->getOpenTagA($item).$item->getUrl() . '"' . $item->getAttributes() . '>' . $item->getIcon() . ' <span>' . $item->title . '</span>'.$this->getCloseTagA($item).'</li>' . PHP_EOL;
     }
 
     /**

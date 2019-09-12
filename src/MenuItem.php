@@ -50,6 +50,7 @@ class MenuItem implements ArrayableContract
         'active',
         'order',
         'hideWhen',
+        'vue'
     );
 
     /**
@@ -125,6 +126,7 @@ class MenuItem implements ArrayableContract
     public function fill($attributes)
     {
         foreach ($attributes as $key => $value) {
+
             if (in_array($key, $this->fillable)) {
                 $this->{$key} = $value;
             }
@@ -324,6 +326,8 @@ class MenuItem implements ArrayableContract
     {
         if ($this->route !== null) {
             return route($this->route[0], $this->route[1]);
+        } elseif ($this->attributes['vue']) {
+            return $this->url;
         }
         
         if(empty($this->url))
@@ -380,7 +384,7 @@ class MenuItem implements ArrayableContract
     {
         $attributes = $this->attributes ? $this->attributes : [];
 
-        array_forget($attributes, ['active', 'icon']);
+        array_forget($attributes, ['active', 'icon', 'vue']);
 
         return HTML::attributes($attributes);
     }
