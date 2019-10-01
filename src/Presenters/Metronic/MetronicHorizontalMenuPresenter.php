@@ -10,47 +10,53 @@ namespace App\Presenters;
 
 use Nwidart\Menus\Presenters\Presenter;
 
-class MetronicHorizontalMenuPresenter extends Presenter {
-
+class MetronicHorizontalMenuPresenter extends Presenter
+{
     /**
      * {@inheritdoc }
      */
-    public function getOpenTagWrapper() {
+    public function getOpenTagWrapper()
+    {
         return PHP_EOL . '<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">' . PHP_EOL;
     }
 
     /**
      * {@inheritdoc }
      */
-    public function getCloseTagWrapper() {
+    public function getCloseTagWrapper()
+    {
         return PHP_EOL . '</ul>' . PHP_EOL;
     }
 
     /**
      * {@inheritdoc }
      */
-    public function getMenuWithoutDropdownWrapper($item) {
+    public function getMenuWithoutDropdownWrapper($item)
+    {
         return '<li ' . $this->getActiveState($item) . '>' . $item->getIcon() . '<a href="' . $item->getUrl() . '" class="m-menu__link"><span class="m-menu__item-here"></span><span class="m-menu__link-text">' . $item->title . '</span></a></li>';
     }
 
     /**
      * {@inheritdoc }
      */
-    public function getActiveState($item) {
+    public function getActiveState($item)
+    {
         return \Request::is($item->getRequest()) ? ' class="m-menu__item  m-menu__item--rel active"' : 'class="m-menu__item  m-menu__item--rel"';
     }
 
     /**
      * {@inheritdoc }
      */
-    public function getDividerWrapper() {
+    public function getDividerWrapper()
+    {
         return '';
     }
 
     /**
      * {@inheritdoc }
      */
-    public function getMenuWithDropDownWrapper($item) {
+    public function getMenuWithDropDownWrapper($item)
+    {
         if ($item->title == '...') {
             return '<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
                             <a  href="#" class="m-menu__link m-menu__toggle">
@@ -85,7 +91,8 @@ class MetronicHorizontalMenuPresenter extends Presenter {
         }
     }
 
-    public function getMultiLevelDropdownWrapper($item) {
+    public function getMultiLevelDropdownWrapper($item)
+    {
         return '<li class="m-menu__item  m-menu__item--submenu"  data-menu-submenu-toggle="hover" data-redirect="true" aria-haspopup="true">
                             <a  href="#" class="m-menu__link m-menu__toggle">
                                 ' . $item->getIcon() . '
@@ -103,5 +110,4 @@ class MetronicHorizontalMenuPresenter extends Presenter {
                             </div>
                         </li>' . PHP_EOL;
     }
-
 }

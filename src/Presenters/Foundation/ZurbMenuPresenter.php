@@ -28,7 +28,7 @@ class ZurbMenuPresenter extends Presenter
      */
     public function getMenuWithoutDropdownWrapper($item)
     {
-        return '<li'.$this->getActiveState($item).'><a href="'. $item->getUrl() .'">'.$item->title.'</a></li>';
+        return '<li' . $this->getActiveState($item) . '><a href="' . $item->getUrl() . '">' . $item->title . '</a></li>';
     }
 
     /**
@@ -53,13 +53,12 @@ class ZurbMenuPresenter extends Presenter
     public function getMenuWithDropDownWrapper($item)
     {
         return '<li class="dropdown dropdown-primary">
-                    <a class="dropdown-toggle" href="#">'.$item->title.'</a>
+                    <a class="dropdown-toggle" href="#">' . $item->title . '</a>
                     <ul class="menu">
-                      '.$this->getChildMenuItems($item).'
+                      ' . $this->getChildMenuItems($item) . '
                     </ul>
                 </li>' . PHP_EOL;
     }
-
 
     /**
      * {@inheritdoc }
@@ -67,10 +66,10 @@ class ZurbMenuPresenter extends Presenter
     public function getMultiLevelDropdownWrapper($item)
     {
         return '<li>
-                  <a href="#">'.$item->title . '</a>
+                  <a href="#">' . $item->title . '</a>
                   <ul class="menu">
                     ' . $this->getChildMenuItems($item) . '
                   </ul>
-                </li>'. PHP_EOL;
+                </li>' . PHP_EOL;
     }
 }
