@@ -96,7 +96,7 @@ TEXT;
         $this->menu->create('test', function (MenuBuilder $menu) {
         });
 
-        $this->assertContains('.dropdown-submenu', $this->menu->style());
+        $this->assertStringContainsString('.dropdown-submenu', $this->menu->style());
     }
 
     /** @test */
