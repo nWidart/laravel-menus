@@ -4,6 +4,12 @@ All Notable changes to `laravel-menus` will be documented in this file.
 
 ## Next
 
+## 5.0.0 - 2019-10-01
+
+### Added
+
+- laravel 6.0 support
+
 ## 4.0.0 - 2019-10-01
 
 ### Added
