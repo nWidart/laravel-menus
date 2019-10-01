@@ -5,6 +5,7 @@ namespace Nwidart\Menus;
 use Closure;
 use Collective\Html\HtmlFacade as HTML;
 use Illuminate\Contracts\Support\Arrayable as ArrayableContract;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -79,11 +80,11 @@ class MenuItem implements ArrayableContract
      */
     protected static function setIconAttribute(array $properties)
     {
-        $icon = array_get($properties, 'attributes.icon');
+        $icon = Arr::get($properties, 'attributes.icon');
         if (!is_null($icon)) {
             $properties['icon'] = $icon;
 
-            array_forget($properties, 'attributes.icon');
+            Arr::forget($properties, 'attributes.icon');
 
             return $properties;
         }
@@ -381,7 +382,7 @@ class MenuItem implements ArrayableContract
     {
         $attributes = $this->attributes ? $this->attributes : [];
 
-        array_forget($attributes, ['active', 'icon']);
+        Arr::forget($attributes, ['active', 'icon']);
 
         return HTML::attributes($attributes);
     }

@@ -2,6 +2,7 @@
 
 namespace Nwidart\Menus\Tests;
 
+use Illuminate\Support\Arr;
 use Nwidart\Menus\Menu;
 use Nwidart\Menus\MenuItem;
 
@@ -123,7 +124,7 @@ class MenuItemTest extends BaseTestCase
         $children = $menuItem->getChilds()[0]->getChilds();
 
         $this->assertCount(1, $children);
-        $childMenuItem = array_first($children);
+        $childMenuItem = Arr::first($children);
         $this->assertEquals('settings.account', $childMenuItem->route[0]);
         $this->assertEquals(['user_id' => 1], $childMenuItem->route[1]);
     }
@@ -138,7 +139,7 @@ class MenuItemTest extends BaseTestCase
         $children = $menuItem->getChilds()[0]->getChilds();
 
         $this->assertCount(1, $children);
-        $childMenuItem = array_first($children);
+        $childMenuItem = Arr::first($children);
         $this->assertEquals('settings.account', $childMenuItem->route[0]);
         $this->assertEquals(['user_id' => 1], $childMenuItem->route[1]);
         $this->assertSame(1, $childMenuItem->order);
@@ -155,7 +156,7 @@ class MenuItemTest extends BaseTestCase
         $children = $menuItem->getChilds()[0]->getChilds();
 
         $this->assertCount(1, $children);
-        $childMenuItem = array_first($children);
+        $childMenuItem = Arr::first($children);
         $this->assertEquals('settings/account', $childMenuItem->url);
         $this->assertEquals('Account', $childMenuItem->title);
     }
@@ -170,7 +171,7 @@ class MenuItemTest extends BaseTestCase
         $children = $menuItem->getChilds()[0]->getChilds();
 
         $this->assertCount(1, $children);
-        $childMenuItem = array_first($children);
+        $childMenuItem = Arr::first($children);
         $this->assertEquals('settings/account', $childMenuItem->url);
         $this->assertEquals('Account', $childMenuItem->title);
         $this->assertSame(1, $childMenuItem->order);
@@ -229,7 +230,7 @@ class MenuItemTest extends BaseTestCase
             $sub->route('settings.account', 'Account');
         });
         $children = $menuItem->getChilds()[0]->getChilds();
-        $childMenuItem = array_first($children);
+        $childMenuItem = Arr::first($children);
 
         $this->assertEquals('http://localhost/settings/account', $childMenuItem->getUrl());
     }
