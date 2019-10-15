@@ -4,7 +4,7 @@ namespace Nwidart\Menus;
 
 use Closure;
 use Countable;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\View\Factory;
 
 class Menu implements Countable

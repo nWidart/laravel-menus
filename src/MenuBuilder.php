@@ -3,7 +3,7 @@
 namespace Nwidart\Menus;
 
 use Countable;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\View\Factory as ViewFactory;
 
 class MenuBuilder implements Countable
