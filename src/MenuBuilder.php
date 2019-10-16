@@ -4,6 +4,7 @@ namespace Nwidart\Menus;
 
 use Countable;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Arr;
 use Illuminate\View\Factory as ViewFactory;
 
 class MenuBuilder implements Countable
@@ -351,8 +352,8 @@ class MenuBuilder implements Countable
         if (func_num_args() == 3) {
             $arguments = func_get_args();
 
-            $title = array_get($arguments, 0);
-            $attributes = array_get($arguments, 2);
+            $title = Arr::get($arguments, 0);
+            $attributes = Arr::get($arguments, 2);
 
             $properties = compact('title', 'attributes');
         }
@@ -382,9 +383,9 @@ class MenuBuilder implements Countable
             $arguments = func_get_args();
 
             return $this->add([
-                'route' => [array_get($arguments, 0), array_get($arguments, 2)],
-                'title' => array_get($arguments, 1),
-                'attributes' => array_get($arguments, 3),
+                'route' => [Arr::get($arguments, 0), Arr::get($arguments, 2)],
+                'title' => Arr::get($arguments, 1),
+                'attributes' => Arr::get($arguments, 3),
             ]);
         }
 
@@ -428,9 +429,9 @@ class MenuBuilder implements Countable
             $arguments = func_get_args();
 
             return $this->add([
-                'url' => $this->formatUrl(array_get($arguments, 0)),
-                'title' => array_get($arguments, 1),
-                'attributes' => array_get($arguments, 2),
+                'url' => $this->formatUrl(Arr::get($arguments, 0)),
+                'title' => Arr::get($arguments, 1),
+                'attributes' => Arr::get($arguments, 2),
             ]);
         }
 

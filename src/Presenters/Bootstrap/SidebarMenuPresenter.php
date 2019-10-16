@@ -2,6 +2,7 @@
 
 namespace Nwidart\Menus\Presenters\Bootstrap;
 
+use Illuminate\Support\Str;
 use Nwidart\Menus\Presenters\Presenter;
 
 class SidebarMenuPresenter extends Presenter
@@ -82,7 +83,7 @@ class SidebarMenuPresenter extends Presenter
      */
     public function getMenuWithDropDownWrapper($item)
     {
-        $id = str_random();
+        $id = Str::random();
 
         return '
 		<li class="' . $this->getActiveStateOnChild($item) . ' panel panel-default" id="dropdown">
