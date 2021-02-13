@@ -3,12 +3,14 @@
 namespace Nwidart\Menus;
 
 use Countable;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Arr;
+use Nwidart\Menus\Traits\CanHide;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\View\Factory as ViewFactory;
 
 class MenuBuilder implements Countable
 {
+    use CanHide;
     /**
      * Menu name.
      *
@@ -634,7 +636,7 @@ class MenuBuilder implements Countable
         $menu = $presenter->getOpenTagWrapper();
 
         foreach ($this->getOrderedItems() as $item) {
-            if ($item->hidden()) {
+            if ($item->hidden() || $this->hidden()) {
                 continue;
             }
 
