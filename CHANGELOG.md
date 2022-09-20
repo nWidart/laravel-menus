@@ -4,6 +4,12 @@ All Notable changes to `laravel-menus` will be documented in this file.
 
 ## Next
 
+## 8.0.0 - 2022-09-20
+
+### Added
+
+- Laravel 9 support
+
 ## 6.0.0 - 2020-11-11
 
 ### Added
