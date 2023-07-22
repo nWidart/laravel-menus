@@ -133,4 +133,47 @@ TEXT;
         $this->menu->destroy();
         $this->assertCount(0, $this->menu->all());
     }
+
+    /** @test */
+    public function it_still_generates_empty_menu_after_adding_dropdown()
+    {
+        $this->menu->create('test', function (MenuBuilder $menu) {
+            $menu->dropdown('Test', function($sub) {
+
+            })->hideWhen(function() {
+                return true;
+            });
+        });
+
+        $expected = <<<TEXT
+
+<ul class="nav navbar-nav">
+
+</ul>
+
+TEXT;
+
+        self::assertEquals($expected, $this->menu->get('test'));
+    }
+
+    /** @test */
+    public function it_still_generates_empty_menu_after_adding_item()
+    {
+        $this->menu->create('test', function (MenuBuilder $menu) {
+            $menu->url('/', 'Test')
+                ->hideWhen(function() {
+                    return true;
+                });
+        });
+
+        $expected = <<<TEXT
+
+<ul class="nav navbar-nav">
+
+</ul>
+
+TEXT;
+
+        self::assertEquals($expected, $this->menu->get('test'));
+    }
 }

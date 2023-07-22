@@ -2,12 +2,12 @@
 
 namespace Nwidart\Menus;
 
-use Closure;
-use Collective\Html\HtmlFacade as HTML;
-use Illuminate\Contracts\Support\Arrayable as ArrayableContract;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
+use Nwidart\Menus\Traits\CanHide;
+use Collective\Html\HtmlFacade as HTML;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Contracts\Support\Arrayable as ArrayableContract;
 
 /**
  * @property string url
@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
  */
 class MenuItem implements ArrayableContract
 {
+    use CanHide;
     /**
      * Array properties.
      *
@@ -53,13 +54,6 @@ class MenuItem implements ArrayableContract
         'order',
         'hideWhen',
     );
-
-    /**
-     * The hideWhen callback.
-     *
-     * @var Closure
-     */
-    protected $hideWhen;
 
     /**
      * Constructor.
@@ -590,33 +584,6 @@ class MenuItem implements ArrayableContract
         $this->order = $order;
 
         return $this;
-    }
-
-    /**
-     * Set hide condition for current menu item.
-     *
-     * @param  Closure
-     * @return boolean
-     */
-    public function hideWhen(Closure $callback)
-    {
-        $this->hideWhen = $callback;
-
-        return $this;
-    }
-
-    /**
-     * Determine whether the menu item is hidden.
-     *
-     * @return boolean
-     */
-    public function hidden()
-    {
-        if (is_null($this->hideWhen)) {
-            return false;
-        }
-
-        return call_user_func($this->hideWhen) == true;
     }
 
     /**
