@@ -159,7 +159,8 @@ class MenuItem implements ArrayableContract
     {
         $properties = compact('title', 'order', 'attributes');
 
-        if (func_num_args() === 3) {
+        if (func_num_args() === 3 && is_array($order)) {
+            // $attributes passed in as third parameter
             $arguments = func_get_args();
 
             $title = Arr::get($arguments, 0);

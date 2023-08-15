@@ -349,7 +349,8 @@ class MenuBuilder implements Countable
     {
         $properties = compact('title', 'order', 'attributes');
 
-        if (func_num_args() == 3) {
+        if (func_num_args() == 3 && is_array($order)) {
+            // $attributes passed in as 3rd parameter
             $arguments = func_get_args();
 
             $title = Arr::get($arguments, 0);
