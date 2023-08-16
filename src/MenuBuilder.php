@@ -339,9 +339,14 @@ class MenuBuilder implements Countable
     /**
      * Create new menu with dropdown.
      *
-     * @param $title_or_properties  can give all properties in one argument, or give title separately
+     * @param $title_or_properties  can give all properties in one argument
+     *    or give title as string title separately
      *
      * @param callable $callback callback to add submenu items
+     *
+     * @param int $order  
+     *
+     * @param array $attributes	
      *
      * @return $this
      */

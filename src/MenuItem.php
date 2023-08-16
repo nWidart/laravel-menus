@@ -150,13 +150,17 @@ class MenuItem implements ArrayableContract
     /**
      * Register new child menu with dropdown.
      *
-     * @param $title_or_properties  can give all properties in one argument, or give title separately
+     * @param $title_or_properties  can give all properties in one argument
+     *    or give title as string title separately
      *
      * @param callable $callback callback to add submenu items
      *
+     * @param int $order
+     *
+     * @param array $attributes
+     *
      * @return $this
      */
-
     public function dropdown($title_or_properties, \Closure $callback, $order = 0, array $attributes = array())
     {
         if (is_array($title_or_properties)) {
