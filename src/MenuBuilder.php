@@ -339,23 +339,46 @@ class MenuBuilder implements Countable
     /**
      * Create new menu with dropdown.
      *
-     * @param $title
-     * @param callable $callback
-     * @param array    $attributes
+     * @param $title_or_properties  can give all properties in one argument
+     *    or give title as string title separately
+     *
+     * @param callable $callback callback to add submenu items
+     *
+     * @param int $order  
+     *
+     * @param array $attributes	
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = null, array $attributes = array())
+
+    public function dropdown($title_or_properties, \Closure $callback, $order = null, array $attributes = array())
     {
-        $properties = compact('title', 'order', 'attributes');
+        if (is_array($title_or_properties)) {
 
-        if (func_num_args() == 3) {
-            $arguments = func_get_args();
+            if (($title_or_properties['attributes']??null) === null)
+            {
+               $title_or_properties['attributes'] = [];
+            }
 
-            $title = Arr::get($arguments, 0);
-            $attributes = Arr::get($arguments, 2);
+            $properties = $title_or_properties;
+        }
+        else
+        {
+            $title = $title_or_properties;
 
-            $properties = compact('title', 'attributes');
+            // backwards compatible with previous code that assumes that 
+            // if three args are passed in, third must be attributes
+
+            if (func_num_args() === 3 && is_array($order)) {
+               $attributes = $order;
+               $properties = compact('title', 'attributes');
+            }
+            else
+            {
+               $properties = compact('title', 'order', 'attributes');
+            }
+
+            $properties = compact('title', 'order', 'attributes');
         }
 
         $item = MenuItem::make($properties);
